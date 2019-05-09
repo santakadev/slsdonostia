@@ -4,7 +4,7 @@ const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
     const req = {
-        TableName: 'gettogethers',
+        TableName: process.env.getTogethersTableName,
         Limit: 8
     }
 

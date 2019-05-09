@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test:integration": "AWS_PROFILE=serverless-local TEST_MODE=handler jest ./tests/*",
-    "test:acceptance": "TEST_MODE=http jest ./tests/*",
-    "deploy": "AWS_PROFILE=serverless-local serverless deploy",
-    "serverless": "serverless"
+    "test:acceptance": "TEST_MODE=http TEST_BASE_URL=https://k80wvhzlna.execute-api.eu-west-1.amazonaws.com/dev/api jest ./tests/*",
+    "deploy": "AWS_PROFILE=serverless-local SLSUSER=dani serverless deploy",
+    "serverless": "serverless",
+    "seed": "AWS_PROFILE=serverless-local node seedGetTogethers.js"
   },
   "author": "",
   "license": "ISC",

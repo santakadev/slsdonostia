@@ -7,8 +7,8 @@ plugins:
 provider:
   name: aws
   runtime: nodejs8.10
-  region: eu-west-1
-  stage: dev
+  region: ${opt:region, self:custom.defaultRegion}
+  stage: ${opt:stage, self:custom.defaultStage}
 
 functions:
   getAllTogethers:
@@ -21,14 +21,16 @@ functions:
       -
         Effect: Allow
         Action: dynamodb:scan
-        Resource: arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/gettogethers
+        Resource: arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/${self:custom.getTogethersTableName}
+    environment:
+      getTogethersTableName: ${self:custom.getTogethersTableName}
 
 resources:
   Resources:
     GetTogethersTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: gettogethers
+        TableName: ${self:custom.getTogethersTableName}
         AttributeDefinitions:
           -
             AttributeName: id
@@ -38,3 +40,8 @@ resources:
             AttributeName: id
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
+
+custom:
+  defaultRegion: eu-west-1
+  defaultStage: dev${env:SLSUSER, ""}
+  getTogethersTableName: ${self:provider.stage}-gettogethers

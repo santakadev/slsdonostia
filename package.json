@@ -7,7 +7,10 @@
     "test:integration": "AWS_PROFILE=serverless-local TEST_MODE=handler jest ./tests/*",
     "test:acceptance": "TEST_MODE=http TEST_BASE_URL=https://k80wvhzlna.execute-api.eu-west-1.amazonaws.com/dev/api jest ./tests/*",
     "deploy": "AWS_PROFILE=serverless-local SLSUSER=dani serverless deploy",
-    "serverless": "serverless",
+    "deploy:sit": "serverless deploy --stage sit",
+    "deploy:prod": "serverless deploy --stage prod",
+    "seed:sit": "node seedGetTogethers.js sit-gettogethers",
+    "serverless": "node seedGetTogethers.js",
     "seed": "AWS_PROFILE=serverless-local node seedGetTogethers.js"
   },
   "author": "",

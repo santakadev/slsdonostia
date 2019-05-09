@@ -33,10 +33,10 @@ const viaHttp = async function(functionPath) {
 }
 }
 
-module.exports.we_invoke_helloWorld = (name) => {
-    const event = { pathParameters: { name: name } };
+module.exports.we_invoke_getAllTogethers = () => {
+    const event = {};
 
     return process.env.TEST_MODE === 'http' ?
-        viaHttp(`helloWorld/${name}`) :
-        viaHandler('helloWorld', event);
+        viaHttp(`getAllTogethers`) :
+        viaHandler('getAllTogethers', event);
 }

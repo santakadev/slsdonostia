@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:integration": "TEST_MODE=handler jest ./tests/*",
+    "test:integration": "AWS_PROFILE=serverless-local TEST_MODE=handler jest ./tests/*",
     "test:acceptance": "TEST_MODE=http jest ./tests/*",
     "deploy": "AWS_PROFILE=serverless-local serverless deploy",
     "serverless": "serverless"

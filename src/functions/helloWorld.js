@@ -1,5 +1,5 @@
 exports.handler = async (event) => {
-    const { name } = event.queryStringParameters;
+    const { name } = event.pathParameters;
 
     const response = {
         statusCode: 200,

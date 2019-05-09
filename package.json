@@ -17,5 +17,7 @@
     "superagent": "^5.0.5",
     "superagent-promise": "^1.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "aws-sdk": "^2.452.0"
+  }
 }

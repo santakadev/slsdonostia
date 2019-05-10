@@ -30,6 +30,20 @@ functions:
     events:
       - sns: ${self:custom.joinGetTogetherSnsTopicName}
 
+  joinGetTogether:
+    handler: src/functions/joinGetTogether.handler
+    events:
+      - http:
+          path: api/joinGetTogether
+          method: post
+    iamRoleStatements:
+      -
+        Effect: Allow
+        Action: sns:publish
+        Resource: ${self:custom.joinGetTogetherSnsTopic}
+    environment:
+      joinGetTogetherTopicArn: ${self:custom.joinGetTogetherSnsTopic}
+
 resources:
   Resources:
     GetTogethersTable:
@@ -49,5 +63,6 @@ resources:
 custom:
   defaultRegion: eu-west-1
   defaultStage: dev${env:SLSUSER, ""}
-  getTogethersTableName: ${self:provider.stage}-gettogethers
+  getTogethersTableName: ${ssm:/gettogethers/${self:provider.stage}/tableNameSecure~true}
   joinGetTogetherSnsTopicName: ${self:provider.stage}-joingettogethers
+  joinGetTogetherSnsTopic: arn:aws:sns:#{AWS::Region}:#{AWS::AccountId}:${self:custom.joinGetTogetherSnsTopicName}
